@@ -31,11 +31,14 @@ subbag (x:xs) (y:ys)    | x == y = subbag (xs) (ys)
                         | otherwise = subbag (x:xs) (ys)
 
 -- Problem E
--- isSet :: Eq a => Bag a -> Bool
+isSet :: Eq a => Bag a -> Bool
+isSet [] = True
+isSet (x:xs) = (snd x == 1) && isSet(xs)
 
 -- Problem F
--- size :: Bag a -> Int
-
+size :: Bag a -> Int
+size [] = 0
+size (x:xs) = snd x + size xs
 
 -- Exercise 2
 
