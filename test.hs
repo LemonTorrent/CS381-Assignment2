@@ -67,8 +67,16 @@ detach a (x:xs)   | a == fst x || a == snd x = detach a (xs)
 --                   | otherwise = x ++ detach(xs)
 
 -- Problem D
--- cyc :: Int -> Graph
+initCyc :: Int -> Graph
+initCyc a = [(a, 1)]
 
+prevCyc :: Int -> Graph
+prevCyc 1 = []
+prevCyc a =  (prevCyc (pred a)) ++ [(pred a, a)]
+
+cyc :: Int -> Graph
+cyc 1 = []
+cyc a = prevCyc a ++ initCyc a
 
 -- Exercise 3
 f = [Pt (4,4), Circle (5,5) 3, Rect (3,3) 7 2]
