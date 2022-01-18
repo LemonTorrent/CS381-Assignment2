@@ -59,7 +59,12 @@ suc a ((x, y):xs) | a == x = nub(y : suc a xs)
                   | otherwise = suc a xs
 
 -- Problem C
--- detach :: Node -> Graph -> Graph
+detach :: Node -> Graph -> Graph
+detach a [] = []
+detach a (x:xs)   | a == fst x || a == snd x = detach a (xs)
+                  | otherwise = x : (detach a (xs))
+-- detach a (x:xs)   | a == fst x || a == snd x = detach(xs)
+--                   | otherwise = x ++ detach(xs)
 
 -- Problem D
 -- cyc :: Int -> Graph
@@ -87,4 +92,10 @@ minX (Circle p l) = (fst p) - l
 minX (Rect p l1 l2) = fst p
 
 -- Problem D
--- move :: Shape -> Point -> Shape
+move :: Shape -> Point -> Shape
+-- move (Pt p1) p2 = Pt addPt p1 p2
+-- move (Pt p) v = Pt p
+move (Pt p1) p2 = Pt (addPt p1 p2)
+
+addPt :: Point -> Point -> Point
+addPt p v = (fst p + fst v, snd p + snd v)
